@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Elsayed Mohamed Hamed - Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #222831;
+            --secondary-color: #31363F;
+            --accent-color: #76ABAE;
+            --text-color: #EEEEEE;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 4px solid var(--accent-color);
+        }
+        h1, h2, h3 {
+            color: var(--accent-color);
+        }
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 2rem 0;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(118, 171, 174, 0.2);
+        }
+        .project-card h3 {
+            margin-top: 0;
+        }
+        .project-card p {
+            flex-grow: 1;
+        }
+        .project-links {
+            margin-top: 1rem;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQErivMHjIQ67A/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1706814515150?e=1735171200&v=beta&t=MBj-bCWhQFi038MINaQeq9cKv555kWF5NYM3O3c7VdI" alt="Ahmed Elsayed Mohamed Hamed" class="profile-image">
+            <h1>Ahmed Elsayed Mohamed Hamed</h1>
+            <p>Backend Developer | .NET & Flutter Specialist</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>A backend developer with a degree in Computer Science and Artificial Intelligence, specialized in .NET and Flutter with two years of experience in Flutter and one year of experience in AI and Computer Science. Passionate about creating innovative solutions and improving user experiences.</p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills">
+                <span class="skill">C++</span>
+                <span class="skill">C#</span>
+                <span class="skill">Python</span>
+                <span class="skill">Java</span>
+                <span class="skill">Dart</span>
+                <span class="skill">.NET</span>
+                <span class="skill">Flutter</span>
+                <span class="skill">Bloc Management</span>
+                <span class="skill">Microsoft SQL Server</span>
+                <span class="skill">SQLite</span>
+                <span class="skill">Firebase</span>
+                <span class="skill">ASP.NET MVC</span>
+                <span class="skill">ASP.NET APIs</span>
+                <span class="skill">Entity Framework</span>
+                <span class="skill">Git</span>
+                <span class="skill">LINQ</span>
+                <span class="skill">HTML/CSS</span>
+                <span class="skill">Repository Pattern</span>
+                <span class="skill">Data Structures</span>
+                <span class="skill">Algorithms</span>
+                <span class="skill">Operating Systems</span>
+                <span class="skill">CCNA (basics)</span>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>GameZone</h3>
+                    <p>A gaming platform where users can explore and play games.</p>
+                    <p><strong>Technologies:</strong> Flutter, .NET, Firebase</p>
+                    <div class="project-links">
+                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/GameZone" target="_blank">GameZone Project</a></p>
+                        <p><strong>Live Demo:</strong> <a href="https://lnkd.in/d6Y4SvKh" target="_blank">GameZone Live Demo</a></p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>E-commerce App</h3>
+                    <p>A Flutter e-commerce app that follows clean code principles and uses the Bloc pattern for efficient state management. Firebase is used for backend services.</p>
+                    <div class="project-links">
+                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/e_commerce_app" target="_blank">E-commerce App Project</a></p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Weather App</h3>
+                    <p>A Flutter weather app that integrates weather APIs for real-time data, ensuring a smooth user experience with the Bloc pattern.</p>
+                    <div class="project-links">
+                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/weather_app" target="_blank">Weather App Project</a></p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Cafe Desktop</h3>
+                    <p>A Python-based cafe management system with a Tkinter GUI and SQLite for database management.</p>
+                    <div class="project-links">
+                        <p><strong>GitHub:</strong> <a href="https://github.com/AhmedSarg/Cafe-System/blob/main/screens/c_selection_screen.py" target="_blank">Cafe Desktop Project</a></p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Chat App</h3>
+                    <p>A Flutter chat app that uses Firebase Authentication for user login and registration, offering real-time messaging.</p>
+                    <div class="project-links">
+                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/chat_app" target="_blank">Chat App Project</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <ul>
+                <li>Backend Developer: Specialized in Flutter and .NET with over 2 years of experience developing delivery apps.</li>
+                <li>Projects Deployed: Multiple projects including GameZone, e-commerce app, and weather app.</li>
+                <li>Artificial Intelligence: Knowledge of basic AI/ML concepts with projects incorporated into apps for enhanced functionality.</li>
+            </ul>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <p><strong>Degree:</strong> B.Sc. in Computer Science and Artificial Intelligence</p>
+            <p><strong>Institution:</strong> Benha University</p>
+            <h3>Certificates:</h3>
+            <ul>
+                <li>ITI (Information Technology Institute)</li>
+                <li>NTI (National Telecommunication Institute)</li>
+            </ul>
+            <h3>Languages:</h3>
+            <ul>
+                <li><strong>Arabic:</strong> Native</li>
+                <li><strong>English:</strong> Very Good</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p><strong>Location:</strong> Subk Eldahak, Pajour City, Monofeya, Egypt</p>
+            <p><strong>Email:</strong> <a href="mailto:ahmedelsayed2003aaa@gmail.com">ahmedelsayed2003aaa@gmail.com</a></p>
+            <p><strong>Phone:</strong> 01097220847</p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ahmed-el-sayed-691805225" target="_blank">Ahmed Elsayed LinkedIn Profile</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379" target="_blank">Ahmed200379 GitHub</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Ahmed Elsayed Mohamed Hamed. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add animation to project cards
+            const projects = document.querySelectorAll('.project-card');
+            projects.forEach(project => {
+                project.addEventListener('mouseenter', () => {
+                    project.style.transform = 'translateY(-5px)';
+                    project.style.boxShadow = '0 4px 10px rgba(118, 171, 174, 0.2)';
+                });
+                project.addEventListener('mouseleave', () => {
+                    project.style.transform = 'translateY(0)';
+                    project.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
