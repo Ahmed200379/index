@@ -1,291 +1,638 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Elsayed Mohamed Hamed - Portfolio</title>
-    <style>
-        :root {
-            --bg-color: #222831;
-            --secondary-color: #31363F;
-            --accent-color: #76ABAE;
-            --text-color: #EEEEEE;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        header {
-            background-color: var(--secondary-color);
-            padding: 2rem 0;
-            text-align: center;
-        }
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 4px solid var(--accent-color);
-        }
-        h1, h2, h3 {
-            color: var(--accent-color);
-        }
-        nav {
-            background-color: var(--secondary-color);
-            padding: 1rem 0;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 1rem;
-        }
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        section {
-            padding: 2rem 0;
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(118, 171, 174, 0.2);
-        }
-        .project-card h3 {
-            margin-top: 0;
-        }
-        .project-card p {
-            flex-grow: 1;
-        }
-        .project-links {
-            margin-top: 1rem;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .skill {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        footer {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ahmed Elsayed – Full Stack .NET</title>
+<!-- Icons Library -->
+<link rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css">
+<link rel="icon" type="image/png" href="code_24dp_EA33F7_FILL0_wght400_GRAD0_opsz24.png">
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<style>
+/* ---- GLOBAL THEME ---- */
+:root {
+    --bg: #0f172a;
+    --text: #fff;
+    --card: #ffffff12;
+    --border: #ffffff33;
+}
+
+[data-theme="light"] {
+    --bg: #fafafa;
+    --text: #111;
+    --card: #fff;
+    --border: #ccc;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+    transition: 0.3s;
+}
+
+/* HEADER */
+.header {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+}
+.nav {
+    max-width: 1100px;
+    margin: auto;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: min-content;
+}
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+}
+.links a {
+    margin: 0 10px;
+    color: var(--text);
+    opacity: .75;
+    text-decoration: none;
+}
+.links a:hover { opacity: 1; }
+
+/* Button Toggle */
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* SECTIONS */
+.section {
+    padding: 110px 0;
+}
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+.title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.bg { background: #1e293b33; }
+
+/* HOME */
+.home-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+.home span {
+    background: linear-gradient(to right, #ff3ad8, #5f7bff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.btn {
+    background: #ffffff22;
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+     transition: .3s;
+}
+.btn-outline {
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+     transition: .3s;
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+.photo-card img {
+    width: 260px;
+    height: 260px;
+    border-radius: 20px;
+    transition: .3s;
+}
+.photo-card:hover { transform: translateY(-7px); }
+
+/* PROJECT CARDS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 25px;
+}
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 12px;
+    transition: .3s;
+    cursor: pointer;
+}
+.card:hover { transform: translateY(-7px); pointer-events: auto;}
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: #000A;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.modal-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+}
+.modal h3 { margin-top: 0; }
+
+/* SKILLS */
+.skill-cat { margin-bottom: 25px; }
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.skills-list span {
+    padding: 8px 14px;
+    background: var(--card);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+}
+
+/* CONTACTS */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 20px;
+}
+.contact-card:hover{ transform: translateY(-7px); }
+.contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: var(--text);
+    text-decoration: none;
+    transition: .3s;
+}
+.contact-card i { font-size: 30px; display: block; }
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px;
+    opacity: .7;
+}
+/* --- RESPONSIVE NAVBAR --- */
+.menu-btn {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        flex-wrap: wrap;
+        padding: 12px;
+    }
+
+    .links {
+        display: none;
+        width: 100%;
+        margin-top: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .links a {
+        display: block;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+
+    .links.show {
+        display: flex;
+        animation: fadeIn .3s ease;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    /* Adjust profile */
+    .profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Move theme button left */
+    #theme-toggle {
+        margin-left: auto;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <img src="https://media.licdn.com/dms/image/v2/D4D03AQFvLCjQ9hnwag/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1732048100838?e=1744848000&v=beta&t=974g-58LSPGKc6eRWuMY1wJyw5HYn-KsJx1se_yIxq0">
-            <h1>Ahmed Elsayed Mohamed</h1>
-            <p>Backend .NET</p>
-        </div>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+<header class="header">
+   <div class="nav">
+    <div class="profile">
+        <img src="https://scontent.faly1-2.fna.fbcdn.net/v/t39.30808-1/508838243_1691847685110774_7184707622149388067_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeFT3SXWNfKgtU0tRt5fXTpBSpCR1g7nnq1KkJHWDueerSZ7u5PhUSyUJwd3M7XaaUf_JUfzEdTdOzlLIHKe97JT&_nc_ohc=gf9ttkV1KOIQ7kNvwGrALPj&_nc_oc=AdkMYBdTkSPxTolrJmy7zSnKmI3AXKcqJwaNBC1UUIXGfc9iqH16xP7p90LnxK3pTkU&_nc_zt=24&_nc_ht=scontent.faly1-2.fna&_nc_gid=zChhoR40u0uZbOMx0Cwbbg&oh=00_AflcjpozYEOOdYsLEXAhzTTlQ4tmIa8nQVsDPpfPIw841g&oe=693F3EAB" class="avatar">
+       <div>
+    <h3 style="margin: 0 0 2px 0;">Ahmed Elsayed</h3>
+    <p style="opacity:.7;font-size:12px;margin:0;">Full Stack .NET Developer</p>
+</div>
+    </div>
+
+    <nav class="links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
     </nav>
 
-    <main class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>A backend developer with a degree in Computer Science and Artificial Intelligence, specialized in .NET and Flutter with two years of experience in Flutter and one year of experience in AI and Computer Science. Passionate about creating innovative solutions and improving user experiences.</p>
-        </section>
+    <button class="menu-btn" id="menu-btn">
+        <i class="lucide-menu"></i>
+    </button>
 
-        <section id="skills">
-            <h2>Skills</h2>
-            <div class="skills">
-                <span class="skill">C++</span>
-                <span class="skill">C#</span>
-                <span class="skill">Python</span>
-                <span class="skill">Java</span>
-                <span class="skill">Dart</span>
-                <span class="skill">.NET</span>
-                <span class="skill">Flutter</span>
-                <span class="skill">Bloc Management</span>
-                <span class="skill">Microsoft SQL Server</span>
-                <span class="skill">SQLite</span>
-                <span class="skill">Firebase</span>
-                <span class="skill">ASP.NET MVC</span>
-                <span class="skill">ASP.NET APIs</span>
-                <span class="skill">Entity Framework</span>
-                <span class="skill">Git</span>
-                <span class="skill">LINQ</span>
-                <span class="skill">HTML/CSS</span>
-                <span class="skill">Repository Pattern</span>
-                <span class="skill">Data Structures</span>
-                <span class="skill">Algorithms</span>
-                <span class="skill">Operating Systems</span>
-                <span class="skill">CCNA (basics)</span>
+    <button id="theme-toggle" class="theme-btn">
+        <i class="lucide-sun"></i>
+    </button>
+</div>
+</header>
+
+<section id="home" class="section home">
+    <div class="container home-flex">
+        <div data-aos="fade-right">
+            <h1>Hi, I'm <span>Ahmed Elsayed</span></h1>
+            <p>Full Stack .NET Developer building scalable APIs & clean architecture systems.</p>
+            <br>
+            <div class="buttons">
+             <a class="btn" href="#projects">My Projects</a>
+            <a class="btn-outline" href="https://github.com/Ahmed200379">GitHub</a>
             </div>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>GameZone</h3>
-                    <p>A gaming platform where users can explore and play games.</p>
-                    <p><strong>Technologies:</strong> Flutter, .NET, Firebase</p>
-                    <div class="project-links">
-                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/GameZone" target="_blank">GameZone Project</a></p>
-                        <p><strong>Live Demo:</strong> <a href="https://lnkd.in/d6Y4SvKh" target="_blank">GameZone Live Demo</a></p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>E-commerce App</h3>
-                    <p>A Flutter e-commerce app that follows clean code principles and uses the Bloc pattern for efficient state management. Firebase is used for backend services.</p>
-                    <div class="project-links">
-                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/e_commerce_app" target="_blank">E-commerce App Project</a></p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Weather App</h3>
-                    <p>A Flutter weather app that integrates weather APIs for real-time data, ensuring a smooth user experience with the Bloc pattern.</p>
-                    <div class="project-links">
-                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/weather_app" target="_blank">Weather App Project</a></p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Cafe Desktop</h3>
-                    <p>A Python-based cafe management system with a Tkinter GUI and SQLite for database management.</p>
-                    <div class="project-links">
-                        <p><strong>GitHub:</strong> <a href="https://github.com/AhmedSarg/Cafe-System/blob/main/screens/c_selection_screen.py" target="_blank">Cafe Desktop Project</a></p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Chat App</h3>
-                    <p>A Flutter chat app that uses Firebase Authentication for user login and registration, offering real-time messaging.</p>
-                    <div class="project-links">
-                        <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379/chat_app" target="_blank">Chat App Project</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2>Experience</h2>
-            <ul>
-                <li>Backend Developer: Specialized in Flutter and .NET with over 2 years of experience developing delivery apps.</li>
-                <li>Projects Deployed: Multiple projects including GameZone, e-commerce app, and weather app.</li>
-                <li>Artificial Intelligence: Knowledge of basic AI/ML concepts with projects incorporated into apps for enhanced functionality.</li>
-            </ul>
-        </section>
-
-        <section id="education">
-            <h2>Education</h2>
-            <p><strong>Degree:</strong> B.Sc. in Computer Science and Artificial Intelligence</p>
-            <p><strong>Institution:</strong> Benha University</p>
-            <h3>Certificates:</h3>
-            <ul>
-                <li>ITI (Information Technology Institute)</li>
-                <li>NTI (National Telecommunication Institute)</li>
-            </ul>
-            <h3>Languages:</h3>
-            <ul>
-                <li><strong>Arabic:</strong> Native</li>
-                <li><strong>English:</strong> Very Good</li>
-            </ul>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <p><strong>Location:</strong> Subk Eldahak, Pajour City, Monofeya, Egypt</p>
-            <p><strong>Email:</strong> <a href="mailto:ahmedelsayed2003aaa@gmail.com">ahmedelsayed2003aaa@gmail.com</a></p>
-            <p><strong>Phone:</strong> 01097220847</p>
-            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ahmed-el-sayed-691805225" target="_blank">Ahmed Elsayed LinkedIn Profile</a></p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/Ahmed200379" target="_blank">Ahmed200379 GitHub</a></p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 Ahmed Elsayed Mohamed Hamed. All rights reserved.</p>
         </div>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
+        <div class="photo-card" data-aos="fade-left">
+            <img src="https://scontent.faly1-2.fna.fbcdn.net/v/t39.30808-1/508838243_1691847685110774_7184707622149388067_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeFT3SXWNfKgtU0tRt5fXTpBSpCR1g7nnq1KkJHWDueerSZ7u5PhUSyUJwd3M7XaaUf_JUfzEdTdOzlLIHKe97JT&_nc_ohc=gf9ttkV1KOIQ7kNvwGrALPj&_nc_oc=AdkMYBdTkSPxTolrJmy7zSnKmI3AXKcqJwaNBC1UUIXGfc9iqH16xP7p90LnxK3pTkU&_nc_zt=24&_nc_ht=scontent.faly1-2.fna&_nc_gid=zChhoR40u0uZbOMx0Cwbbg&oh=00_AflcjpozYEOOdYsLEXAhzTTlQ4tmIa8nQVsDPpfPIw841g&oe=693F3EAB">
+        </div>
+    </div>
+</section>
 
-            // Add animation to project cards
-            const projects = document.querySelectorAll('.project-card');
-            projects.forEach(project => {
-                project.addEventListener('mouseenter', () => {
-                    project.style.transform = 'translateY(-5px)';
-                    project.style.boxShadow = '0 4px 10px rgba(118, 171, 174, 0.2)';
-                });
-                project.addEventListener('mouseleave', () => {
-                    project.style.transform = 'translateY(0)';
-                    project.style.boxShadow = 'none';
-                });
-            });
-        });
-    </script>
+<section id="about" class="section">
+    <div class="container" data-aos="fade-up">
+        <h2 class="title">About</h2>
+        <p style="max-width:650px;opacity:.85;">
+            I’m a Backend Developer dedicated to building robust, scalable, and secure software solutions.
+I focus on writing high-quality, maintainable code and following best development practices.
+Driven by continuous learning, I strive to grow my expertise and contribute to impactful, innovative projects.
+        </p>
+    </div>
+</section>
+<!-- ---------------- PART 2: PROJECTS, SKILLS, CERTIFICATES, CONTACT, MODAL, FOOTER & JS ---------------- -->
+
+<!-- -------- PROJECTS (Cards + Modal data) -------- -->
+<section id="projects" class="section bg">
+    <div class="container">
+        <h2 class="title" data-aos="fade-up">Projects</h2>
+
+        <div class="grid">
+
+            <!-- Academy Guide -->
+            <div class="card" data-aos="zoom-in"
+                 data-title="Academy Guide"
+                 data-desc="A Scalable .NET Core 8 RESTful API for Academic Management. Features: subject registration, materials repository, student activities, and a chatbot. Built with a focus on Clean Architecture, scalability, and security."
+                 data-tech="C#, .NET 8, EF Core, LINQ, JWT, SQL Server, 3-Tier Architecture, Unit of Work, Repository Pattern"
+                 data-date="Nov 2024 – May 2025">
+                <h3>Academy Guide</h3>
+                <p>.NET 8 RESTful API — Clean Architecture & EF Core</p>
+                <small>Nov 2024 – May 2025</small>
+            </div>
+
+            <!-- Game Zone -->
+            <div class="card" data-aos="zoom-in" data-aos-delay="120"
+                 data-title="Game Zone"
+                 data-desc="A .NET Core 7 MVC-based gaming platform with authentication and authorization. Uses Repository Pattern to manage data and provides a responsive UI for an engaging user experience."
+                 data-tech="C#, .NET Core 7, EF Core, LINQ, Repository Pattern, Auth, SQL, HTML/CSS/JS, Bootstrap, jQuery"
+                 data-date="Sep 2024 – Nov 2024">
+                <h3>Game Zone</h3>
+                <p>.NET Core 7 MVC platform — Auth & Repository Pattern</p>
+                <small>Sep 2024 – Nov 2024</small>
+            </div>
+
+            <!-- E-commerce Crud -->
+            <div class="card" data-aos="zoom-in" data-aos-delay="240"
+                 data-title="E-commerce CRUD"
+                 data-desc="A .NET 8 RESTful API providing efficient CRUD operations for an e-commerce backend. Built for simplicity and reliability."
+                 data-tech="C#, .NET 8, EF Core, LINQ, Repository Pattern, SQL Server"
+                 data-date="Sep 2024">
+                <h3>E-commerce CRUD</h3>
+                <p>.NET 8 CRUD API — EF Core & LINQ</p>
+                <small>Sep 2024</small>
+            </div>
+
+            <!-- Uber (Flutter) -->
+            <div class="card" data-aos="zoom-in" data-aos-delay="360"
+                 data-title="Uber (Ride Booking App)"
+                 data-desc="A ride-booking mobile app built with Flutter & Dart. Uses Firebase for backend, Maps & APIs for location services and authentication."
+                 data-tech="Flutter, Dart, Firebase, Maps API, Authentication"
+                 data-date="May 2022">
+                <h3>Uber (Ride Booking)</h3>
+                <p>Flutter mobile app — Firebase & Maps</p>
+                <small>May 2022</small>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Modal (hidden by default) -->
+<div id="project-modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+        <button id="modal-close" style="float:right;background:none;border:none;font-size:18px;cursor:pointer;">✕</button>
+        <h3 id="modal-title"></h3>
+        <p id="modal-desc" style="opacity:.9;"></p>
+        <p><strong>Technologies:</strong> <span id="modal-tech"></span></p>
+        <p><strong>Date:</strong> <span id="modal-date"></span></p>
+        <div style="margin-top:12px;text-align:right;">
+            <a id="modal-github" href="#" target="_blank" style="text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);">View Repo</a>
+        </div>
+    </div>
+</div>
+
+<!-- -------- SKILLS (Categories + Icons) -------- -->
+<section id="skills" class="section">
+    <div class="container" data-aos="fade-up">
+        <h2 class="title">Skills</h2>
+
+        <!-- Programming Languages -->
+        <div class="skill-cat">
+            <h4>Programming Languages <i class="lucide-code" style="opacity:.8;"></i></h4>
+            <div class="skills-list">
+                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>C#</span>
+                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>C++</span>
+                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>Python</span>
+                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>Java</span>
+                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>Dart</span>
+                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>JavaScript</span>
+            </div>
+        </div>
+
+        <!-- Software / Frameworks -->
+        <div class="skill-cat">
+            <h4>Software & Frameworks <i class="lucide-layers" style="opacity:.8;"></i></h4>
+            <div class="skills-list">
+                <span><i class="lucide-archive" style="margin-right:6px;"></i>ASP.NET Core</span>
+                <span><i class="lucide-database" style="margin-right:6px;"></i>Microsoft SQL Server</span>
+                <span><i class="lucide-git-branch" style="margin-right:6px;"></i>Entity Framework</span>
+                <span><i class="lucide-shield-check" style="margin-right:6px;"></i>JWT / Auth</span>
+                <span><i class="lucide-award" style="margin-right:6px;"></i>Unit Testing (xUnit)</span>
+                <span><i class="lucide-server" style="margin-right:6px;"></i>AWS (basic)</span>
+                <span><i class="lucide-layout" style="margin-right:6px;"></i>MVC, Repository Pattern</span>
+                <span><i class="lucide-box" style="margin-right:6px;"></i>Clean Architecture</span>
+                <span><i class="lucide-command" style="margin-right:6px;"></i>LINQ</span>
+                <span><i class="lucide-codepen" style="margin-right:6px;"></i>HTML/CSS/Bootstrap/jQuery</span>
+                <span><i class="lucide-package" style="margin-right:6px;"></i>Flutter (Bloc)</span>
+            </div>
+        </div>
+
+        <!-- Tools & Concepts -->
+        <div class="skill-cat">
+            <h4>Tools & Concepts <i class="lucide-tool" style="opacity:.8;"></i></h4>
+            <div class="skills-list">
+                <span><i class="lucide-database" style="margin-right:6px;"></i>Data Structures & Algorithms</span>
+                <span><i class="lucide-server" style="margin-right:6px;"></i>N-Tier Architecture</span>
+                <span><i class="lucide-repeat" style="margin-right:6px;"></i>Unit of Work</span>
+                <span><i class="lucide-box" style="margin-right:6px;"></i>Repository Pattern</span>
+                <span><i class="lucide-network" style="margin-right:6px;"></i>Networking & CCNA basics</span>
+                <span><i class="lucide-hard-drive" style="margin-right:6px;"></i>MCSA basics</span>
+            </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="skill-cat">
+            <h4>Soft Skills <i class="lucide-users" style="opacity:.8;"></i></h4>
+            <div class="skills-list">
+                <span>Team Work</span>
+                <span>Problem Solving</span>
+                <span>System Analysis</span>
+                <span>Communication & Collaboration</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- -------- CERTIFICATES -------- -->
+<section id="certificates" class="section bg">
+    <div class="container" data-aos="fade-up">
+        <h2 class="title">Certificates</h2>
+
+        <div class="grid">
+            <div class="card" data-aos="flip-left">
+                <h3>ITI – Backend .NET</h3>
+                <p>Professional backend .NET training from ITI.</p>
+                <span>2023</span>
+            </div>
+
+            <div class="card" data-aos="flip-left" data-aos-delay="160">
+                <h3>Asp.Net Web Design</h3>
+                <p>Web design and ASP.NET fundamentals.</p>
+                <span>2024</span>
+            </div>
+
+            <div class="card" data-aos="flip-left" data-aos-delay="320">
+                <h3>Online Courses</h3>
+                <p>Various tutorials: Metigator, PassionateCoders, DevCreed, YouTube series.</p>
+                <span>2021 – 2024</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- -------- CONTACT (All icons + CV Download + WhatsApp + Location) -------- -->
+<section id="contact" class="section">
+    <div class="container" data-aos="fade-up">
+        <h2 class="title">Contact</h2>
+
+        <div class="contact-grid">
+            <a class="contact-card" href="mailto:ahmedelsayed2003aaa@gmail.com">
+                <i class="lucide-mail"></i>
+                <strong>Email</strong>
+                <div style="opacity:.8;margin-top:6px;">ahmedelsayed2003aaa</div>
+            </a>
+
+            <a class="contact-card" href="tel:+201097220847">
+                <i class="lucide-phone"></i>
+                <strong>Phone</strong>
+                <div style="opacity:.8;margin-top:6px;">+20 109 722 0847</div>
+            </a>
+
+            <a class="contact-card" href="https://linkedin.com/in/ahmed-el-sayed-691805225" target="_blank">
+                <i class="lucide-linkedin"></i>
+                <strong>LinkedIn</strong>
+                <div style="opacity:.8;margin-top:6px;">Ahmed200379</div>
+            </a>
+
+            <a class="contact-card" href="https://github.com/Ahmed200379" target="_blank">
+                <i class="lucide-github"></i>
+                <strong>GitHub</strong>
+                <div style="opacity:.8;margin-top:6px;">Ahmed200379</div>
+            </a>
+
+            <a class="contact-card" href="https://web.facebook.com/ahmed.el.sayed.346756" target="_blank">
+                <i class="lucide-facebook"></i>
+                <strong>Facebook</strong>
+                <div style="opacity:.8;margin-top:6px;">Ahmed Elsayed</div>
+            </a>
+
+            <a class="contact-card" href="https://wa.me/201097220847?text=Hello%20Ahmed" target="_blank">
+                <i class="lucide-message-square"></i>
+                <strong>WhatsApp</strong>
+                <div style="opacity:.8;margin-top:6px;">+20 109 722 0847</div>
+            </a>
+
+            <a class="contact-card" href="#" id="cv-download">
+                <i class="lucide-file-text"></i>
+                <strong>Download CV</strong>
+                <div style="opacity:.8;margin-top:6px;">PDF</div>
+            </a>
+
+            <div class="contact-card" style="cursor:default;">
+                <i class="lucide-map-pin"></i>
+                <strong>Location</strong>
+                <div style="opacity:.8;margin-top:6px;">Cairo, Egypt</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    © 2025 Ahmed Elsayed — Full Stack .NET
+</footer>
+
+<!-- ---------------- SCRIPTS ---------------- -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+/* AOS init */
+AOS.init({ duration: 850, once: true });
+
+/* THEME TOGGLE */
+const toggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+toggle.addEventListener('click', () => {
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        toggle.innerHTML = '<i class="lucide-moon"></i>';
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        toggle.innerHTML = '<i class="lucide-sun"></i>';
+    }
+});
+
+/* PROJECT MODAL LOGIC */
+const modal = document.getElementById('project-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalTech = document.getElementById('modal-tech');
+const modalDate = document.getElementById('modal-date');
+const modalClose = document.getElementById('modal-close');
+const modalGithub = document.getElementById('modal-github');
+
+/* When clicking any card, open modal and fill data */
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+        const title = card.getAttribute('data-title') || '';
+        const desc = card.getAttribute('data-desc') || '';
+        const tech = card.getAttribute('data-tech') || '';
+        const date = card.getAttribute('data-date') || '';
+        // fill modal
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+        modalTech.textContent = tech;
+        modalDate.textContent = date;
+        // example: if you host repos, update href here (defaults to GitHub)
+        modalGithub.href = 'https://github.com/Ahmed200379';
+        // show modal
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+    });
+});
+
+/* Close modal */
+modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+});
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    }
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    }
+});
+
+/* CV Download (place your PDF in same folder with this name or update href) */
+document.getElementById('cv-download').addEventListener('click', (e) => {
+    e.preventDefault();
+    // If you have a PDF file, set its filename here:
+    const cvFile = 'https://drive.google.com/file/d/1QsBPplcdyA7oWx39ALHsh6mStSWuVYsO/view?usp=sharing'; // <-- put your CV file name in the same folder
+    // create temporary link to download
+    const a = document.createElement('a');
+    a.href = cvFile;
+    a.download = 'Ahmed_Elsayed_CV.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+});
+/* Mobile Menu Toggle */
+const menuBtn = document.getElementById("menu-btn");
+const navLinks = document.getElementById("nav-links");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+});
+
+</script>
 </body>
 </html>
