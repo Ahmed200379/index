@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ahmed Elsayed – Full Stack .NET</title>
-<!-- Icons Library -->
-<link rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css">
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Ahmed200379/index/main/iconf.png"><!-- AOS Animation Library -->
+<title>Ahmed ElSayed – Backend .NET</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Ahmed200379/index/main/iconf.png">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
 <style>
 /* ---- GLOBAL THEME ---- */
 :root {
@@ -15,6 +14,7 @@
     --text: #fff;
     --card: #ffffff12;
     --border: #ffffff33;
+    --primary: #5f7bff;
 }
 
 [data-theme="light"] {
@@ -28,7 +28,7 @@ body {
     background: var(--bg);
     color: var(--text);
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     scroll-behavior: smooth;
     transition: 0.3s;
 }
@@ -37,55 +37,78 @@ body {
 .header {
     position: fixed;
     width: 100%;
-    z-index: 999;
-    backdrop-filter: blur(10px);
+    z-index: 1000; /* Increased z-index */
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+    background: rgba(15, 23, 42, 0.85); /* Slightly less transparent for better readability */
 }
+[data-theme="light"] .header { background: rgba(250, 250, 250, 0.85); }
+
 .nav {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
-    padding: 12px 0;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: min-content;
+    position: relative; /* Context for absolute positioning */
 }
 .avatar {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     border: 2px solid var(--border);
+    object-fit: cover;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.links {
+    display: flex;
+    gap: 20px;
 }
 .links a {
-    margin: 0 10px;
     color: var(--text);
     opacity: .75;
     text-decoration: none;
+    font-weight: 500;
+    transition: .2s;
 }
-.links a:hover { opacity: 1; }
+.links a:hover { opacity: 1; color: var(--primary); }
 
-/* Button Toggle */
-.theme-btn {
+/* Buttons */
+.theme-btn, .menu-btn {
     background: none;
     border: none;
     color: var(--text);
-    font-size: 24px;
     cursor: pointer;
+    margin-left: 15px;
+    display: flex; /* Ensure icons center */
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+.theme-btn svg, .menu-btn svg {
+    width: 28px;
+    height: 28px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
 }
 
 /* SECTIONS */
-.section {
-    padding: 110px 0;
-}
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-}
+.section { padding: 100px 0; }
+.container { width: 90%; max-width: 1200px; margin: auto; }
 .title {
     font-size: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     font-weight: bold;
+    border-left: 5px solid var(--primary);
+    padding-left: 15px;
 }
 .bg { background: #1e293b33; }
 
@@ -94,175 +117,128 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
+    min-height: 80vh;
 }
+.home h1 { font-size: 3.5rem; margin-bottom: 10px; line-height: 1.2; }
 .home span {
     background: linear-gradient(to right, #ff3ad8, #5f7bff);
     -webkit-background-clip: text;
     color: transparent;
 }
 .btn {
-    background: #ffffff22;
-    padding: 10px 16px;
-    border-radius: 6px;
-    color: var(--text);
+    background: var(--primary);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #fff;
     text-decoration: none;
-     transition: .3s;
+    font-weight: bold;
+    transition: .3s;
 }
+.btn:hover { opacity: 0.9; transform: translateY(-2px); }
 .btn-outline {
     border: 1px solid var(--border);
-    padding: 10px 16px;
-    border-radius: 6px;
+    padding: 12px 24px;
+    border-radius: 8px;
     color: var(--text);
     text-decoration: none;
-     transition: .3s;
-}
-.buttons {
-    display: flex;
-    gap: 15px;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
-.photo-card img {
-    width: 260px;
-    height: 260px;
-    border-radius: 20px;
+    font-weight: bold;
     transition: .3s;
 }
-.photo-card:hover { transform: translateY(-7px); }
+.btn-outline:hover { background: var(--card); }
+.buttons { display: flex; gap: 15px; margin-top: 25px; }
+.photo-card img {
+    width: 350px; height: 350px; border-radius: 30px;
+    border: 4px solid var(--card); transition: .3s;
+    object-fit: cover; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.photo-card:hover { transform: translateY(-10px); }
+
+/* EXPERIENCE CARDS */
+.exp-grid { display: flex; flex-direction: column; gap: 20px; max-width: 900px; }
+.exp-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--primary); padding: 25px;
+    border-radius: 12px; transition: .3s;
+}
+.exp-card:hover { transform: translateX(10px); background: rgba(255,255,255,0.05); }
+.exp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
+.exp-header h3 { margin: 0; font-size: 1.4rem; }
+.exp-date { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; }
+.exp-role { color: var(--primary); font-weight: 600; margin-bottom: 10px; display: block; font-size: 1.1rem; }
 
 /* PROJECT CARDS */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-    gap: 25px;
-}
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 30px; }
 .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 12px;
-    transition: .3s;
-    cursor: pointer;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 25px; border-radius: 16px; transition: .3s;
+    cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
 }
-.card:hover { transform: translateY(-7px); pointer-events: auto;}
-/* MODAL */
-.modal {
-    position: fixed;
-    inset: 0;
-    background: #000A;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-.modal-content {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 25px;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 12px;
-}
-.modal h3 { margin-top: 0; }
+.card:hover { transform: translateY(-7px); border-color: var(--primary); }
+.card h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.4rem; }
+.card p { opacity: 0.8; line-height: 1.5; margin-bottom: 15px; }
+.card small { opacity: 0.6; display: block; margin-top: auto; }
 
-/* SKILLS */
-.skill-cat { margin-bottom: 25px; }
-.skills-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.skills-list span {
-    padding: 8px 14px;
-    background: var(--card);
-    border-radius: 20px;
-    border: 1px solid var(--border);
-}
+/* CERTIFICATES */
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+.cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: .3s; }
+.cert-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.cert-img { width: 100%; height: 180px; object-fit: cover; object-position: top; border-bottom: 1px solid var(--border); }
+.cert-info { padding: 15px; }
+.cert-info h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
+.cert-info p { margin: 0; font-size: 0.9rem; opacity: 0.7; }
 
-/* CONTACTS */
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-    gap: 20px;
-}
-.contact-card:hover{ transform: translateY(-7px); }
-.contact-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    color: var(--text);
-    text-decoration: none;
-    transition: .3s;
-}
-.contact-card i { font-size: 30px; display: block; }
+/* SKILLS & CONTACTS */
+.skill-cat { margin-bottom: 30px; }
+.skills-list { display: flex; flex-wrap: wrap; gap: 12px; }
+.skills-list span { padding: 10px 18px; background: var(--card); border-radius: 8px; border: 1px solid var(--border); font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 20px; }
+.contact-card { background: var(--card); border: 1px solid var(--border); padding: 25px; border-radius: 16px; text-align: center; color: var(--text); text-decoration: none; transition: .3s; }
+.contact-card:hover{ transform: translateY(-7px); background: rgba(255,255,255,0.08); }
+.contact-card i { font-size: 32px; display: block; margin-bottom: 15px; color: var(--primary); }
+.contact-card svg { width: 32px; height: 32px; margin-bottom: 15px; color: var(--primary); stroke: currentColor; fill: none; stroke-width: 2; }
 
 /* FOOTER */
-.footer {
-    text-align: center;
-    padding: 20px;
-    opacity: .7;
-}
+.footer { text-align: center; padding: 30px; opacity: .7; border-top: 1px solid var(--border); margin-top: 50px; }
+
+/* MODAL */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
+.modal-content { background: #1e293b; border: 1px solid var(--border); padding: 30px; width: 90%; max-width: 600px; border-radius: 16px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.5); color: #fff; }
+#modal-close { position: absolute; top: 15px; right: 15px; color: #fff; }
+
 /* --- RESPONSIVE NAVBAR --- */
-.menu-btn {
-    display: none;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-}
+.menu-btn { display: none; }
 
 @media (max-width: 768px) {
-    .nav {
-        flex-wrap: wrap;
-        padding: 12px;
-    }
-
+    .nav { padding: 15px; }
+    
+    /* Hide links by default on mobile */
     .links {
         display: none;
+        position: absolute;
+        top: 100%; /* Pushes it exactly below the header */
+        left: 0;
         width: 100%;
-        margin-top: 12px;
+        background: var(--bg);
         flex-direction: column;
         text-align: center;
-        gap: 12px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        z-index: 1001; /* Ensure it stays on top */
     }
-
-    .links a {
-        display: block;
-        padding: 10px 0;
-        font-size: 18px;
-    }
-
-    .links.show {
-        display: flex;
-        animation: fadeIn .3s ease;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-
-    /* Adjust profile */
-    .profile {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    /* Move theme button left */
-    #theme-toggle {
-        margin-left: auto;
-    }
+    
+    /* Show links when 'show' class is added via JS */
+    .links.show { display: flex; }
+    
+    /* Show menu button on mobile */
+    .menu-btn { display: block; }
+    
+    .home-flex { flex-direction: column-reverse; text-align: center; justify-content: center;}
+    .buttons { justify-content: center; }
+    .photo-card img { width: 280px; height: 280px; }
+    .home h1 { font-size: 2.5rem; }
 }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 </style>
 </head>
 <body>
@@ -270,368 +246,473 @@ body {
 <header class="header">
    <div class="nav">
     <div class="profile">
-        <img src="https://raw.githubusercontent.com/Ahmed200379/index/main/image.jpg" class="avatar">
-       <div>
-    <h3 style="margin: 0 0 2px 0;">Ahmed Elsayed</h3>
-    <p style="opacity:.7;font-size:12px;margin:0;">Full Stack .NET Developer</p>
-</div>
+        <img src="https://raw.githubusercontent.com/Ahmed200379/index/main/image.jpg" class="avatar" alt="Ahmed Elsayed">
+        <div>
+            <h3>Ahmed ELSayed</h3>
+        </div>
     </div>
 
     <nav class="links" id="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
         <a href="#certificates">Certificates</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <button class="menu-btn" id="menu-btn">
-        <i class="lucide-menu"></i>
-    </button>
-
-    <button id="theme-toggle" class="theme-btn">
-        <i class="lucide-sun"></i>
-    </button>
+    <div style="display:flex; align-items:center;">
+        <button class="menu-btn" id="menu-btn">
+            <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+        </button>
+        <button id="theme-toggle" class="theme-btn">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+    </div>
 </div>
 </header>
 
 <section id="home" class="section home">
-    <div class="container home-flex">
+ <div class="container home-flex">
         <div data-aos="fade-right">
-            <h1>Hi, I'm <span>Ahmed Elsayed</span></h1>
-            <p>Full Stack .NET Developer building scalable APIs & clean architecture systems.</p>
-            <br>
-            <div class="buttons">
-             <a class="btn" href="#projects">My Projects</a>
-            <a class="btn-outline" href="https://github.com/Ahmed200379">GitHub</a>
-            </div>
-        </div>
+    <h1>Hi, I'm <span>Ahmed ELSayed</span></h1>
+    
+    <h3 style="margin-top: -10px; margin-bottom: 20px; opacity: 0.85; font-weight: normal;">
+        Software Engineer | Backend .NET
+    </h3>
+
+    <p style="font-size: 1.2rem; opacity: 0.9; line-height: 1.6; max-width: 600px;">
+        A highly motivated and fast-learning Computer Science graduate with practical experience in .NET backend development.
+    </p>
+    <br>
+
+    <div class="buttons">
+        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn-outline" href="https://github.com/Ahmed200379" target="_blank">GitHub</a>
+    </div>
+ </div>
 
         <div class="photo-card" data-aos="fade-left">
-            <img src="https://raw.githubusercontent.com/Ahmed200379/index/main/image.jpg">
+            <img src="https://raw.githubusercontent.com/Ahmed200379/index/main/image.jpg" alt="Ahmed Essam">
         </div>
     </div>
 </section>
 
 <section id="about" class="section">
     <div class="container" data-aos="fade-up">
-        <h2 class="title">About</h2>
-        <p style="max-width:650px;opacity:.85;">
-            I’m a Backend Developer dedicated to building robust, scalable, and secure software solutions.
-I focus on writing high-quality, maintainable code and following best development practices.
-Driven by continuous learning, I strive to grow my expertise and contribute to impactful, innovative projects.
+        <h2 class="title">About Me</h2>
+        <p style="max-width:850px;opacity:.85;line-height:1.8; font-size:1.1rem;">
+            A highly motivated and fast-learning Computer Science graduate with practical experience in .NET backend development. 
+            Passionate about building efficient software solutions and eager to grow as a versatile Software Engineer. 
+            Seeking an opportunity to contribute to real-world projects, collaborate with experienced teams, and continuously enhance my skills across the software development lifecycle.
+            <br><br>
+            <span style="display:block; padding:15px; background:var(--card); border-radius:8px; border-left: 4px solid var(--primary);">
+                <strong>Education:</strong> (OCT 2021 - JUL2025) graduated, BSc of Computer science and Artificial intelligence, Benha University.<br>
+                • GPA : 3.01(V.Good)
+            </span>
         </p>
     </div>
 </section>
-<!-- ---------------- PART 2: PROJECTS, SKILLS, CERTIFICATES, CONTACT, MODAL, FOOTER & JS ---------------- -->
 
-<!-- -------- PROJECTS (Cards + Modal data) -------- -->
-<section id="projects" class="section bg">
+<section id="experience" class="section bg">
+    <div class="container">
+        <h2 class="title" data-aos="fade-up">Work Experience</h2>
+        <div class="exp-grid">
+
+            <div class="exp-card" data-aos="fade-up">
+                <div class="exp-header">
+                    <h3>Yalla Code</h3>
+                    <span class="exp-date">may 2025 - Dec 2025</span>
+                </div>
+                <span class="exp-role">Instructor</span>
+                <p style="opacity:0.85;">
+                    I Worked as a programming instructor at Yalla Code, where I taught Python, OOP concepts, C#, web technologies (HTML, CSS, JavaScript), and SQL Server.
+                </p>
+            </div>
+
+            <div class="exp-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="exp-header">
+                    <h3>ITI (Information Technology Institute)</h3>
+                    <span class="exp-date">Internship</span>
+                </div>
+                <span class="exp-role">Asp.NET Intern</span>
+                <p style="opacity:0.85;">
+                    Successfully completed a Asp.NET track internship. Developed strong skills in C# and ASP.NET, which significantly improved problem-solving abilities.
+                </p>
+            </div>
+
+            <div class="exp-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="exp-header">
+                    <h3>NTI (National Telecommunication Institute)</h3>
+                    <span class="exp-date">Internship</span>
+                </div>
+                <span class="exp-role">Web Design</span>
+                <p style="opacity:0.85;">
+Web Design Trainee at NTI, with hands-on training in HTML, CSS, JavaScript, UI fundamentals, and responsive web development.                </p>
+            </div>
+
+            <div class="exp-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="exp-header">
+                    <h3>GDG</h3>
+                    <span class="exp-date">Nov 2023 - Oct 2023</span>
+                </div>
+                <span class="exp-role">Flutter Developer</span>
+                <p style="opacity:0.85;">
+I contributed as a Flutter developer in GDG, building cross-platform mobile applications.</p>
+            </div>
+         <div class="exp-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="exp-header">
+                    <h3>FullStack .Net</h3>
+                    <span class="exp-date">jul 2023 - sep 2023</span>
+                </div>
+                <span class="exp-role">Intern</span>
+                <p style="opacity:0.85;">
+                    Successfully completed a FullStack .NET track internship. Developed strong skills in C# ,oop ,windows form, html, css, js, mvc, ef core, sql server and ASP.NET, which significantly improved problem-solving abilities.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="section">
     <div class="container">
         <h2 class="title" data-aos="fade-up">Projects</h2>
 
         <div class="grid">
-
-            <!-- Academy Guide -->
             <div class="card" data-aos="zoom-in"
-                 data-title="Academy Guide"
-                 data-desc="A Scalable .NET Core 8 RESTful API for Academic Management. Features: subject registration, materials repository, student activities, and a chatbot. Built with a focus on Clean Architecture, scalability, and security."
-                 data-tech="C#, .NET 8, EF Core, LINQ, JWT, SQL Server, 3-Tier Architecture, Unit of Work, Repository Pattern"
-                 data-date="Nov 2024 – May 2025">
-                <h3>Academy Guide</h3>
-                <p>.NET 8 RESTful API — Clean Architecture & EF Core</p>
-                <small>Nov 2024 – May 2025</small>
+                data-title="Student Guide (Graduation Project)"
+                 data-desc="An intelligent academic assistant system to streamline course enrollment, academic results, department guidance, GPA estimation, complaint management, and more."
+                 data-tech=".NET 8, C#, SQL Server, Entity Framework Core, JWT, Stripe, EPPlus, 3-Tier Architecture, Fuzzy Search"
+                 data-date="2024-2025">
+                <h3>Student Guide</h3>
+                <p>An intelligent academic assistant platform for students and staff at the Faculty of Computers and Artificial Intelligence – Benha University.</p>
+                <small>Graduation Project</small>
             </div>
 
-            <!-- Game Zone -->
-            <div class="card" data-aos="zoom-in" data-aos-delay="120"
-                 data-title="Game Zone"
-                 data-desc="A .NET Core 7 MVC-based gaming platform with authentication and authorization. Uses Repository Pattern to manage data and provides a responsive UI for an engaging user experience."
-                 data-tech="C#, .NET Core 7, EF Core, LINQ, Repository Pattern, Auth, SQL, HTML/CSS/JS, Bootstrap, jQuery"
-                 data-date="Sep 2024 – Nov 2024">
-                <h3>Game Zone</h3>
-                <p>.NET Core 7 MVC platform — Auth & Repository Pattern</p>
-                <small>Sep 2024 – Nov 2024</small>
+            <div class="card" data-aos="zoom-in" data-aos-delay="100"
+                  data-title="GameZone"
+                 data-desc="A comprehensive platform for gaming enthusiasts with robust backend, dynamic frontend, user authentication, and responsive design."
+                 data-tech=".NET Core, ASP.NET Core, Entity Framework Core, SQL Server, Identity Framework, Razor Pages, MVC, Bootstrap"
+                 data-date="2024">
+                <h3>GameZone</h3>
+                <p>A comprehensive platform for gaming enthusiasts. Features secure user authentication, dynamic UI, and a responsive design for seamless gameplay experience.</p>
+                <small>Personal Project</small>
             </div>
 
-            <!-- E-commerce Crud -->
-            <div class="card" data-aos="zoom-in" data-aos-delay="240"
-                 data-title="E-commerce CRUD"
-                 data-desc="A .NET 8 RESTful API providing efficient CRUD operations for an e-commerce backend. Built for simplicity and reliability."
-                 data-tech="C#, .NET 8, EF Core, LINQ, Repository Pattern, SQL Server"
-                 data-date="Sep 2024">
-                <h3>E-commerce CRUD</h3>
-                <p>.NET 8 CRUD API — EF Core & LINQ</p>
-                <small>Sep 2024</small>
+            <div class="card" data-aos="zoom-in" data-aos-delay="200"
+               data-title="E-Commerce CRUD API"
+             data-desc="A RESTful API for managing products, categories, orders, and users in an e-commerce platform with full CRUD functionality."
+             data-tech=".NET Core, C#, SQL Server, Entity Framework Core, Repository Pattern"
+             data-date="2024">
+            <h3>E-Commerce CRUD API</h3>
+             <p>A backend API for e-commerce applications that supports creating, reading, updating, and deleting products, categories, orders, and users with secure authentication.</p>
+            <small>Backend Project</small>
             </div>
 
-            <!-- Uber (Flutter) -->
-            <div class="card" data-aos="zoom-in" data-aos-delay="360"
-                 data-title="Uber (Ride Booking App)"
-                 data-desc="A ride-booking mobile app built with Flutter & Dart. Uses Firebase for backend, Maps & APIs for location services and authentication."
-                 data-tech="Flutter, Dart, Firebase, Maps API, Authentication"
-                 data-date="May 2022">
-                <h3>Uber (Ride Booking)</h3>
-                <p>Flutter mobile app — Firebase & Maps</p>
-                <small>May 2022</small>
+            <div class="card" data-aos="zoom-in" data-aos-delay="300"
+                 data-title="E-Commerce App"
+                data-desc="A cross-platform mobile application for shopping, featuring product browsing, cart management, secure authentication, and order placement."
+                 data-tech="Flutter, Dart, Firebase, REST API, Provider"
+                 data-date="2023">
+                <h3>E-Commerce Flutter App</h3>
+                <p>A mobile shopping app built with Flutter, allowing users to browse products, manage their cart, place orders.</p>
+                <small>Mobile Application</small>
             </div>
 
-        </div>
-    </div>
-</section>
+            <div class="card" data-aos="zoom-in" data-aos-delay="400"
+                data-title="Uber Clone App (Flutter)"
+                 data-desc="A ride-hailing mobile application replicating Uber’s core functionalities, including booking rides, real-time tracking."
+                 data-tech="Flutter, Dart, Firebase, Google Maps API, REST API, Provider"
+                 data-date="2022">
+                <h3>Uber Clone App</h3>
+                 <p>A mobile application built with Flutter that allows users to book rides, track drivers in real-time, manage payments, and view ride history.</p>
+                 <small>Mobile Application</small>
+            </div>
 
-<!-- Modal (hidden by default) -->
-<div id="project-modal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
-        <button id="modal-close" style="float:right;background:none;border:none;font-size:18px;cursor:pointer;">✕</button>
-        <h3 id="modal-title"></h3>
-        <p id="modal-desc" style="opacity:.9;"></p>
-        <p><strong>Technologies:</strong> <span id="modal-tech"></span></p>
-        <p><strong>Date:</strong> <span id="modal-date"></span></p>
-        <div style="margin-top:12px;text-align:right;">
-            <a id="modal-github" href="#" target="_blank" style="text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);">View Repo</a>
-        </div>
-    </div>
+            <div class="card" data-aos="zoom-in" data-aos-delay="500"
+                data-title="Cafe Management System"
+                data-desc="A desktop application for managing cafe operations, including menu management, order processing, and sales tracking."
+                data-tech="Python, Tkinter, MySQL, SQLite, CRUD Operations"
+                data-date="2022">
+               <h3>Cafe Management System</h3>
+               <p>A desktop application built with Python and Tkinter for managing cafe operations. Features include adding/updating menu items, processing orders, tracking sales, and generating reports.</p>
+               <small>Desktop Application</small>
+            </div>
+            <div class="card" data-aos="zoom-in" data-aos-delay="500"
+               data-title="Personal Portfolio"
+                data-desc="A personal portfolio website showcasing projects, skills, and professional experience using HTML, CSS, and JavaScript."
+                  data-tech="HTML, CSS, JavaScript, AOS (Animation on Scroll)"
+                data-date="2025">
+                <h3>Personal Portfolio</h3>
+                <p>A responsive portfolio website built to showcase my projects, skills, and professional journey. Features animated project cards, smooth scrolling, and modern design.</p>
+                 <small>Web Development Project</small>
+            </div>
+            <div class="card" data-aos="zoom-in"
+            data-title="Pharmacy Management System"
+             data-desc="A desktop application for managing pharmacy operations, including inventory management, sales, and customer tracking."
+             data-tech="Java, Swing, MySQL, JDBC, CRUD Operations"
+          data-date="2022">
+             <h3>Pharmacy Management System</h3>
+             <p>A desktop application built with Java Swing for managing pharmacy operations. Features include adding/updating medicines, processing sales, tracking customers, and generating reports.</p>
+          <small>Desktop Application</small>
 </div>
-
-<!-- -------- SKILLS (Categories + Icons) -------- -->
-<section id="skills" class="section">
-    <div class="container" data-aos="fade-up">
-        <h2 class="title">Skills</h2>
-
-        <!-- Programming Languages -->
-        <div class="skill-cat">
-            <h4>Programming Languages <i class="lucide-code" style="opacity:.8;"></i></h4>
-            <div class="skills-list">
-                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>C#</span>
-                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>C++</span>
-                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>Python</span>
-                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>Java</span>
-                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>Dart</span>
-                <span><i class="lucide-slash-square" style="margin-right:6px;"></i>JavaScript</span>
-            </div>
-        </div>
-
-        <!-- Software / Frameworks -->
-        <div class="skill-cat">
-            <h4>Software & Frameworks <i class="lucide-layers" style="opacity:.8;"></i></h4>
-            <div class="skills-list">
-                <span><i class="lucide-archive" style="margin-right:6px;"></i>ASP.NET Core</span>
-                <span><i class="lucide-database" style="margin-right:6px;"></i>Microsoft SQL Server</span>
-                <span><i class="lucide-git-branch" style="margin-right:6px;"></i>Entity Framework</span>
-                <span><i class="lucide-shield-check" style="margin-right:6px;"></i>JWT / Auth</span>
-                <span><i class="lucide-award" style="margin-right:6px;"></i>Unit Testing (xUnit)</span>
-                <span><i class="lucide-server" style="margin-right:6px;"></i>AWS (basic)</span>
-                <span><i class="lucide-layout" style="margin-right:6px;"></i>MVC, Repository Pattern</span>
-                <span><i class="lucide-box" style="margin-right:6px;"></i>Clean Architecture</span>
-                <span><i class="lucide-command" style="margin-right:6px;"></i>LINQ</span>
-                <span><i class="lucide-codepen" style="margin-right:6px;"></i>HTML/CSS/Bootstrap/jQuery</span>
-                <span><i class="lucide-package" style="margin-right:6px;"></i>Flutter (Bloc)</span>
-            </div>
-        </div>
-
-        <!-- Tools & Concepts -->
-        <div class="skill-cat">
-            <h4>Tools & Concepts <i class="lucide-tool" style="opacity:.8;"></i></h4>
-            <div class="skills-list">
-                <span><i class="lucide-database" style="margin-right:6px;"></i>Data Structures & Algorithms</span>
-                <span><i class="lucide-server" style="margin-right:6px;"></i>N-Tier Architecture</span>
-                <span><i class="lucide-repeat" style="margin-right:6px;"></i>Unit of Work</span>
-                <span><i class="lucide-box" style="margin-right:6px;"></i>Repository Pattern</span>
-                <span><i class="lucide-network" style="margin-right:6px;"></i>Networking & CCNA basics</span>
-                <span><i class="lucide-hard-drive" style="margin-right:6px;"></i>MCSA basics</span>
-            </div>
-        </div>
-
-        <!-- Soft Skills -->
-        <div class="skill-cat">
-            <h4>Soft Skills <i class="lucide-users" style="opacity:.8;"></i></h4>
-            <div class="skills-list">
-                <span>Team Work</span>
-                <span>Problem Solving</span>
-                <span>System Analysis</span>
-                <span>Communication & Collaboration</span>
-            </div>
         </div>
     </div>
 </section>
 
-<!-- -------- CERTIFICATES -------- -->
 <section id="certificates" class="section bg">
     <div class="container" data-aos="fade-up">
         <h2 class="title">Certificates</h2>
 
-        <div class="grid">
-            <div class="card" data-aos="flip-left">
-                <h3>ITI – Backend .NET</h3>
-                <p>Professional backend .NET training from ITI.</p>
-                <span>2023</span>
+        <div class="cert-grid">
+            
+            <div class="cert-card">
+                <img src="https://media.licdn.com/dms/image/v2/D4D2DAQH071OhXH4xGg/profile-treasury-image-shrink_160_160/B4DZUUnM96HYAk-/0/1739807577130?e=1766080800&v=beta&t=zo3AvC_U_0c9EGq1IOPR2FUxsjwzHpD_ZGYgqFfuGMI" class="cert-img" loading="lazy">
+                <div class="cert-info">
+                    <h4>Asp .NET</h4>
+                    <p>1 month internship</p>
+                </div>
             </div>
 
-            <div class="card" data-aos="flip-left" data-aos-delay="160">
-                <h3>Asp.Net Web Design</h3>
-                <p>Web design and ASP.NET fundamentals.</p>
-                <span>2024</span>
+            <div class="cert-card">
+                <img src="https://media.licdn.com/dms/image/v2/D4D2DAQFacQIp5VmOTw/profile-treasury-document-cover-images_480/profile-treasury-document-cover-images_480/0/1739115896443?e=1766080800&v=beta&t=ejLHMcx1TnzL8ckYsqLa4juoUGo2NuRw_lQ0LhtK-j0" class="cert-img" loading="lazy">
+                <div class="cert-info">
+                    <h4>Web Design</h4>
+                    <p>3-Month internship</p>
+                </div>
             </div>
 
-            <div class="card" data-aos="flip-left" data-aos-delay="320">
-                <h3>Online Courses</h3>
-                <p>Various tutorials: Metigator, PassionateCoders, DevCreed, YouTube series.</p>
-                <span>2021 – 2024</span>
+            <div class="cert-card">
+                <img src="https://media.licdn.com/dms/image/v2/D4D2DAQEc1jtao8cx_w/profile-treasury-image-shrink_160_160/profile-treasury-image-shrink_160_160/0/1727885023097?e=1766080800&v=beta&t=Gn43_BIpieh_DmU1yV1GFJsC4Qrcf_top9rJ8x0vZOU" class="cert-img" loading="lazy">
+                <div class="cert-info">
+                    <h4>GDG/h4>
+                    <p>1 year</p>
+                </div>
             </div>
+
+            <div class="cert-card">
+                <img src="https://media.licdn.com/dms/image/v2/D4D2DAQGBdATBVGahyg/profile-treasury-image-shrink_160_160/profile-treasury-image-shrink_160_160/0/1698513171248?e=1766080800&v=beta&t=xCDqjn-zb3sdvd8bU-K8tuvYtLhvceaY0CYyaxHLxoU" class="cert-img" loading="lazy">
+                <div class="cert-info">
+                    <h4>FullStack .NET</h4>
+                    <p>2-month internship</p>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <img src="https://media.licdn.com/dms/image/v2/D4D2DAQGKXvz6duratA/profile-treasury-document-cover-images_480/profile-treasury-document-cover-images_480/0/1711815021703?e=1766080800&v=beta&t=0fkVYm8Ht5QXZg5xAlRjLViB9E9zR1HjhHcp3cWDWwo" class="cert-img" loading="lazy">
+                <div class="cert-info">
+                    <h4>Judge in Codeavour</h4>
+                    <p>freelance</p>
+                </div>
+            </div>
+
+             <div class="cert-card">
+                <img src="https://udemy-certificate.s3.amazonaws.com/image/UC-9e77d8ac-d368-47d6-afdb-71ad8c08a996.jpg?v=1662854358000" class="cert-img" loading="lazy">
+                <div class="cert-info">
+                    <h4>Flutter Certificate</h4>
+                    <p>Udemy</p>
+                </div>
+            </div>
+
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- -------- CONTACT (All icons + CV Download + WhatsApp + Location) -------- -->
-<section id="contact" class="section">
+<section id="skills" class="section">
     <div class="container" data-aos="fade-up">
-        <h2 class="title">Contact</h2>
+        <h2 class="title">Skills</h2>
+
+        <div class="skill-cat">
+            <h4>Programming Languages</h4>
+            <div class="skills-list">
+                <span>C#</span>
+                <span>C++</span>
+                <span>Python</span>
+                <span>Java</span>
+                <span>Dart</span>
+                <span>JavaScript</span>
+            </div>
+        </div>
+
+        <div class="skill-cat">
+            <h4>Technical Skills</h4>
+            <div class="skills-list">
+                <span>ASP.NET Core</span>
+                <span>ASP.NET MVC</span>
+                <span>Entity Framework</span>
+                <span>Dapper(basics)</span>
+                <span>SQL Server</span>
+                <span>RESTful Api</span>
+                <span>LINQ</span>
+                <span>SignalR</span>
+                <span>Onion Architecture</span>
+                <span>N-teir Architecture</span>
+                <span>OOP</span>
+                <span>Data Structures</span>
+                <span>Algorithms</span>
+                <span>CCNA(basics)</span>
+                <span>Flutter</span>
+                <span>Unit Testing (xUnit)</span>
+                <span>Repository Pattern</span>
+                <span>JWT / Auth</span>
+                <span>Api versions / background Service</span>
+                <span>Unit of Work</span>
+                <span>Docker</span>
+            </div>
+        </div>
+
+        <div class="skill-cat">
+            <h4>Soft Skills</h4>
+            <div class="skills-list">
+                <span>Problem Solving</span>
+                <span>Teamwork</span>
+                <span>System Analysis</span>
+                <span>Time Management</span>
+                <span>Adaptable to New Technologies</span>
+                <span>Diligent and Efficient Worker</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact" class="section bg">
+    <div class="container" data-aos="fade-up">
+        <h2 class="title">Contact Me</h2>
 
         <div class="contact-grid">
             <a class="contact-card" href="mailto:ahmedelsayed2003aaa@gmail.com">
-                <i class="lucide-mail"></i>
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 <strong>Email</strong>
-                <div style="opacity:.8;margin-top:6px;">ahmedelsayed2003aaa</div>
+                <div style="opacity:.8;margin-top:6px; font-size:14px;">ahmedelsayed2003aaa</div>
             </a>
 
-            <a class="contact-card" href="tel:+201097220847">
-                <i class="lucide-phone"></i>
+            <a class="contact-card" href="tel:01097220847">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 <strong>Phone</strong>
-                <div style="opacity:.8;margin-top:6px;">+20 109 722 0847</div>
+                <div style="opacity:.8;margin-top:6px;">01097220847</div>
+            </a>
+             <a class="contact-card" href="https://web.facebook.com/ahmed.el.sayed.346756">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <strong>Facebook</strong>
+                <div style="opacity:.8;margin-top:6px;">Ahmed ElSayed (Osama)</div>
             </a>
 
-            <a class="contact-card" href="https://linkedin.com/in/ahmed-el-sayed-691805225" target="_blank">
-                <i class="lucide-linkedin"></i>
+            <a class="contact-card" href="https://www.linkedin.com/in/ahmed-el-sayed-691805225/" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 <strong>LinkedIn</strong>
-                <div style="opacity:.8;margin-top:6px;">Ahmed200379</div>
+                <div style="opacity:.8;margin-top:6px;">Ahmed Elsayed</div>
             </a>
 
             <a class="contact-card" href="https://github.com/Ahmed200379" target="_blank">
-                <i class="lucide-github"></i>
+                <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 <strong>GitHub</strong>
                 <div style="opacity:.8;margin-top:6px;">Ahmed200379</div>
             </a>
 
-            <a class="contact-card" href="https://web.facebook.com/ahmed.el.sayed.346756" target="_blank">
-                <i class="lucide-facebook"></i>
-                <strong>Facebook</strong>
-                <div style="opacity:.8;margin-top:6px;">Ahmed Elsayed</div>
-            </a>
-
             <a class="contact-card" href="https://wa.me/201097220847?text=Hello%20Ahmed" target="_blank">
-                <i class="lucide-message-square"></i>
+                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 <strong>WhatsApp</strong>
-                <div style="opacity:.8;margin-top:6px;">+20 109 722 0847</div>
+                <div style="opacity:.8;margin-top:6px;">Chat Now</div>
             </a>
 
-            <a class="contact-card" href="#" id="cv-download">
-                <i class="lucide-file-text"></i>
+            <a class="contact-card" href="https://drive.google.com/file/d/1QsBPplcdyA7oWx39ALHsh6mStSWuVYsO/view?usp=sharing" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 <strong>Download CV</strong>
                 <div style="opacity:.8;margin-top:6px;">PDF</div>
             </a>
-
-            <div class="contact-card" style="cursor:default;">
-                <i class="lucide-map-pin"></i>
-                <strong>Location</strong>
-                <div style="opacity:.8;margin-top:6px;">Cairo, Egypt</div>
-            </div>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    © 2025 Ahmed Elsayed — Full Stack .NET
+    © 2025 Ahmed Elsayed — Backend .NET
 </footer>
 
-<!-- ---------------- SCRIPTS ---------------- -->
+<div id="project-modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+        <button id="modal-close" style="background:none;border:none;font-size:24px;cursor:pointer;">&times;</button>
+        <h3 id="modal-title" style="margin-top:0; color: var(--primary);"></h3>
+        <p id="modal-desc" style="opacity:.9; line-height:1.6;"></p>
+        <hr style="border:0; border-top:1px solid var(--border); margin:15px 0;">
+        <p><strong>Technologies:</strong> <span id="modal-tech" style="color: #cbd5e1;"></span></p>
+        <p><strong>Type:</strong> <span id="modal-date" style="color: #cbd5e1;"></span></p>
+        <div style="margin-top:20px;text-align:right;">
+            <a id="modal-github" href="https://github.com/Ahmed200379" target="_blank" class="btn">View Repository</a>
+        </div>
+    </div>
+</div>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-/* AOS init */
-AOS.init({ duration: 850, once: true });
+AOS.init({ duration: 800, once: true });
 
-/* THEME TOGGLE */
+// Toggle Theme
 const toggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 toggle.addEventListener('click', () => {
     if (html.getAttribute('data-theme') === 'dark') {
         html.setAttribute('data-theme', 'light');
-        toggle.innerHTML = '<i class="lucide-moon"></i>';
     } else {
         html.setAttribute('data-theme', 'dark');
-        toggle.innerHTML = '<i class="lucide-sun"></i>';
     }
 });
 
-/* PROJECT MODAL LOGIC */
+// Mobile Menu Logic
+const menuBtn = document.getElementById("menu-btn");
+const navLinks = document.getElementById("nav-links");
+
+menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent immediate closing
+    navLinks.classList.toggle("show");
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+    if (!navLinks.contains(e.target) && !menuBtn.contains(e.target)) {
+        navLinks.classList.remove("show");
+    }
+});
+
+// Close menu when clicking a link
+navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+    });
+});
+
+// Modal Logic
 const modal = document.getElementById('project-modal');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-desc');
 const modalTech = document.getElementById('modal-tech');
 const modalDate = document.getElementById('modal-date');
 const modalClose = document.getElementById('modal-close');
-const modalGithub = document.getElementById('modal-github');
 
-/* When clicking any card, open modal and fill data */
-document.querySelectorAll('.card').forEach(card => {
+document.querySelectorAll('.card[data-title]').forEach(card => {
     card.addEventListener('click', () => {
-        const title = card.getAttribute('data-title') || '';
-        const desc = card.getAttribute('data-desc') || '';
-        const tech = card.getAttribute('data-tech') || '';
-        const date = card.getAttribute('data-date') || '';
-        // fill modal
-        modalTitle.textContent = title;
-        modalDesc.textContent = desc;
-        modalTech.textContent = tech;
-        modalDate.textContent = date;
-        // example: if you host repos, update href here (defaults to GitHub)
-        modalGithub.href = 'https://github.com/Ahmed200379';
-        // show modal
+        modalTitle.textContent = card.getAttribute('data-title');
+        modalDesc.textContent = card.getAttribute('data-desc');
+        modalTech.textContent = card.getAttribute('data-tech');
+        modalDate.textContent = card.getAttribute('data-date');
         modal.style.display = 'flex';
         modal.setAttribute('aria-hidden', 'false');
     });
 });
 
-/* Close modal */
 modalClose.addEventListener('click', () => {
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
 });
-modal.addEventListener('click', (e) => {
+window.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.style.display = 'none';
         modal.setAttribute('aria-hidden', 'true');
     }
 });
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden', 'true');
-    }
-});
-
-/* CV Download (place your PDF in same folder with this name or update href) */
-document.getElementById('cv-download').addEventListener('click', (e) => {
-    e.preventDefault();
-    // If you have a PDF file, set its filename here:
-    const cvFile = 'https://drive.google.com/file/d/1QsBPplcdyA7oWx39ALHsh6mStSWuVYsO/view?usp=sharing'; // <-- put your CV file name in the same folder
-    // create temporary link to download
-    const a = document.createElement('a');
-    a.href = cvFile;
-    a.download = 'Ahmed_Elsayed_CV.pdf';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-});
-/* Mobile Menu Toggle */
-const menuBtn = document.getElementById("menu-btn");
-const navLinks = document.getElementById("nav-links");
-
-menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
-});
-
 </script>
 </body>
 </html>
