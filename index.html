@@ -10,7 +10,16 @@
     gtag('js', new Date());
     gtag('config', 'G-VD0F39XZRK');
   </script>
+<meta name="description" content="Ahmed Elsayed – Backend .NET Developer. Skilled in .NET Core, C#, SQL Server, Entity Framework, REST APIs. Explore projects, skills, and certifications.">
+<meta name="keywords" content="Ahmed Elsayed, Backend .NET, .NET Developer, C#, ASP.NET, Entity Framework, SQL Server, REST API, Software Engineer">
+<meta name="author" content="Ahmed Elsayed">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Ahmed ElSayed – Backend .NET Developer">
+<meta property="og:description" content="Explore Ahmed Elsayed's backend .NET projects, skills, and professional journey.">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ahmed200379/index/main/image.jpg">
+<meta property="og:url" content="https://ahmed200379.github.io/AhmedElsayedProfile/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="google-site-verification" content="SahP1AqWgTxxZuqHOvIgwckwXGervbGf-zhQGo0kETQ" />
 <title>Ahmed ElSayed – Backend .NET</title>
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Ahmed200379/index/main/iconf.png">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -657,6 +666,49 @@ I contributed as a Flutter developer in GDG, building cross-platform mobile appl
         </div>
     </div>
 </div>
+<script>
+(function () {
+
+    const API_BASE = "https://ahmed-api.runasp.net/api/visits";
+    let visitId = null;
+
+    function startVisit() {
+        fetch(`${API_BASE}/start`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                page: document.title,
+                url: location.href,
+                referrer: document.referrer || null,
+                userAgent: navigator.userAgent
+            })
+        })
+        .then(r => r.json())
+        .then(d => {
+            visitId = d.visitId;
+            sessionStorage.setItem("visitId", visitId);
+        })
+        .catch(console.error);
+    }
+
+    function endVisit() {
+        visitId ||= sessionStorage.getItem("visitId");
+        if (!visitId) return;
+
+        navigator.sendBeacon(
+            `${API_BASE}/leave`,
+            JSON.stringify({ visitId })
+        );
+    }
+
+    document.addEventListener("DOMContentLoaded", startVisit);
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") endVisit();
+    });
+    window.addEventListener("beforeunload", endVisit);
+
+})();
+</script>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
