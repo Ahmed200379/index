@@ -669,9 +669,10 @@ I contributed as a Flutter developer in GDG, building cross-platform mobile appl
 <script>
 (function () {
 
-    const API_BASE = "https://ahmed-api.runasp.net/api/visits";
+    const API_BASE = "https://visitorstracking.runasp.net/Visiting";
     let visitId = null;
 
+    // Start a visit
     function startVisit() {
         fetch(`${API_BASE}/start`, {
             method: "POST",
@@ -691,17 +692,20 @@ I contributed as a Flutter developer in GDG, building cross-platform mobile appl
         .catch(console.error);
     }
 
+    // End a visit
     function endVisit() {
         visitId ||= sessionStorage.getItem("visitId");
         if (!visitId) return;
 
-        navigator.sendBeacon(
-            `${API_BASE}/leave`,
-            JSON.stringify({ visitId })
-        );
+        fetch(`${API_BASE}/leave/${visitId}`, {
+            method: "PUT"
+        }).catch(console.error);
     }
 
+    // Start visit when page loads
     document.addEventListener("DOMContentLoaded", startVisit);
+
+    // End visit when page is hidden or tab closed
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden") endVisit();
     });
@@ -709,6 +713,7 @@ I contributed as a Flutter developer in GDG, building cross-platform mobile appl
 
 })();
 </script>
+
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
